@@ -43,8 +43,17 @@ void drawMandelbrot(pixel pixels[TILE_SIZE][TILE_SIZE],
 // for the given complex number `c`.
 int escapeSteps(complex c) {
     int steps = 0;
-
-    // TODO: COMPLETE THIS FUNCTION
+    double m = c.re * c.re + c.im * c.im;
+    int a = 0;
+    int b = 0;
+    while (steps <= 256 && m <= 4) {
+            a = c.re;
+            b = c.im;
+            c.re += a * a - b * b;
+            c.im += 2 * a * b;
+            m = c.re * c.re + c.im * c.im;
+            steps++;
+    }
 
     return steps;
 }
