@@ -34,7 +34,18 @@ void drawMandelbrot(pixel pixels[TILE_SIZE][TILE_SIZE],
         complex center, int z) {
     // hint: use this array to store the result from escapeGrid.
     int grid[TILE_SIZE][TILE_SIZE];
-
+    int x = 0;
+    int y = 0;
+    complex c;
+    while (y < TILE_SIZE) {
+        while (x < TILE_SIZE) {
+            c.re = x - center.re;
+            c.im = y - center.im;
+            grid[y][x] = escapeSteps(c);
+            x++;
+        }
+        y++;
+    }
     // TODO: COMPLETE THIS FUNCTION
 
 }
@@ -43,8 +54,18 @@ void drawMandelbrot(pixel pixels[TILE_SIZE][TILE_SIZE],
 // for the given complex number `c`.
 int escapeSteps(complex c) {
     int steps = 0;
-
-    // TODO: COMPLETE THIS FUNCTION
+    double a = c.re;
+    double b = c.im;
+    double c, d;
+    double m = c.re*c.re + c.im*c.im;
+    while (steps < 256 && m <= 4) {
+        c = c.re;
+        d = c.im;
+        c.re = c*c - d*d + a;
+        c.im = 2 * c * d + b;
+        m = c.re*c.re + c.im*c.im;
+        steps++;
+    }
 
     return steps;
 }
